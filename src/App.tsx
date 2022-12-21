@@ -1,18 +1,15 @@
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ThemeProvider } from "styled-components";
-import Router from "./Router";
+import Header from "./Components/Header";
+import Router from "./Router/Router";
 import GlobalStyle from "./styles/GlobalStyles";
-import { lightTheme } from "./theme";
-
 
 function App() {
   return (
     <>
-      <ThemeProvider theme={lightTheme}>
-        <GlobalStyle />
-        <Router />
-        <ReactQueryDevtools initialIsOpen></ReactQueryDevtools>
-      </ThemeProvider>
+      <GlobalStyle />
+      <Router />
+      <ReactQueryDevtools initialIsOpen></ReactQueryDevtools>
     </>
   );
 }
