@@ -55,6 +55,7 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   height: 200px;
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
+  background-position: center;
 `;
 
 const rowVariants = {
