@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useMatch } from "react-router-dom";
 import Header from "../Components/Header";
+import GlobalStyle from "../styles/GlobalStyles";
 import Home from "./Home";
 import Search from "./Search";
 import Tv from "./Tv";

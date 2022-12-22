@@ -7,7 +7,6 @@ import {
 import { useEffect, useState } from "react";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../img/Netflix-logo.png";
 
 const Nav = styled(motion.nav)`
   width: 100%;
@@ -19,7 +18,6 @@ const Nav = styled(motion.nav)`
   position: fixed;
   top: 0;
   font-size: 17px;
-  color: white;
 `;
 
 const Col = styled.div`
