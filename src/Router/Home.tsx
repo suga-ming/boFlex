@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useScroll } from "framer-motion";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useNavigate, useMatch } from "react-router-dom";
 import styled from "styled-components";

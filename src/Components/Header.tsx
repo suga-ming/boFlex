@@ -5,6 +5,7 @@ import {
   useViewportScroll,
 } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 
@@ -59,7 +60,7 @@ const Circle = styled(motion.span)`
   margin: 0 auto;
 `;
 
-const Search = styled.span`
+const Search = styled.form`
   color: white;
   svg {
     height: 25px;
@@ -98,6 +99,10 @@ const navVariants = {
   },
 };
 
+interface IForm {
+  keyword: string;
+}
+
 const Header = () => {
   const homeMatch = useMatch("/");
   console.log("homeMatch", homeMatch);
@@ -123,6 +128,10 @@ const Header = () => {
       }
     });
   }, [scrollY, navAnimation]);
+  const { register, handleSubmit } = useForm<IForm>();
+  const onValid = (data: IForm) => {
+    console.log(data);
+  };
   return (
     <div>
       <Nav variants={navVariants} animate={navAnimation} initial={"top"}>
@@ -149,7 +158,7 @@ const Header = () => {
           </Items>
         </Col>
         <Col>
-          <Search>
+          <Search onSubmit={handleSubmit(onValid)}>
             <motion.svg
               onClick={toggleSearch}
               style={{ zIndex: 1 }}
@@ -166,6 +175,7 @@ const Header = () => {
               ></path>
             </motion.svg>
             <Input
+              {...register("keyword", { required: true, minLength: 2 })}
               animate={inputAnimation}
               initial={{ scaleX: 0 }}
               transition={{ ease: "linear" }}
