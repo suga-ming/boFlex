@@ -74,7 +74,7 @@ const Input = styled(motion.input)`
   transform-origin: right center;
   position: absolute;
   left: -200px;
-  background-color: black;
+  background-color: transparent;
   border: 1px solid white;
   width: 200px;
   height: 30px;
