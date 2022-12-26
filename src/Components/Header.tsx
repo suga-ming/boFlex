@@ -100,6 +100,7 @@ const navVariants = {
 
 const Header = () => {
   const homeMatch = useMatch("/");
+  console.log("homeMatch", homeMatch);
   const tvMatch = useMatch("tv");
   const [searchOpen, setSearchOpen] = useState(false);
   const inputAnimation = useAnimation();
