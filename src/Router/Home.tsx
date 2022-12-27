@@ -64,6 +64,7 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   background-image: url(${(props) => props.bgPhoto});
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   &:first-child {
     transform-origin: center left;
   }
@@ -105,7 +106,7 @@ const BigMoive = styled(motion.div)`
 
 const BigCover = styled.div`
   width: 100%;
-  background-size: center;
+  background-size: cover;
   background-position: center center;
   height: 400px;
 `;
@@ -130,6 +131,16 @@ const BogOverView = styled.p`
   top: -80px;
   position: relative;
   color: ${(props) => props.theme.white.lighter};
+`;
+
+const NextSvg = styled.svg`
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  right: 15px;
+  top: 112px;
+  cursor: pointer;
 `;
 
 const rowVariants = {
@@ -207,15 +218,22 @@ const Home = () => {
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner
-            onClick={increaseIndex}
-            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
-          >
+          <Banner bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}>
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
           <Slider>
             <MovieTitle>Now Playing</MovieTitle>
+            <NextSvg
+              onClick={increaseIndex}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="white"
+                d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+              />
+            </NextSvg>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
               <Row
                 variants={rowVariants}
