@@ -71,6 +71,8 @@ const Box = styled(motion.div)<{ bgPhoto: string }>`
   &:last-child {
     transform-origin: center right;
   }
+  display: flex;
+  align-items: flex-end;
 `;
 
 const Info = styled(motion.div)`
@@ -78,8 +80,6 @@ const Info = styled(motion.div)`
   opacity: 0;
   padding: 10px;
   width: 100%;
-  position: absolute;
-  bottom: 0;
   h4 {
     text-align: center;
     font-size: 18px;
