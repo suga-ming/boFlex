@@ -122,6 +122,7 @@ const MovieTitle = styled.p`
   margin-bottom: 10px;
   font-size: 20px;
   padding-left: 10px;
+  font-weight: 800;
 `;
 
 const BogOverView = styled.p`
@@ -214,7 +215,7 @@ const Home = () => {
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
           <Slider>
-            <MovieTitle>지금 상영중인 영화</MovieTitle>
+            <MovieTitle>Now Playing</MovieTitle>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
               <Row
                 variants={rowVariants}
