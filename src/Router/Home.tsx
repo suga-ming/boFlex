@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useScroll } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { useNavigate, useMatch } from "react-router-dom";
@@ -43,10 +43,6 @@ const Overview = styled.p`
 const Slider = styled.div`
   position: relative;
   top: -100px;
-  /* width: 100%; */
-  /* width: 1920px; */
-  /* padding: 30px; */
-  /* overflow: hidden; */
 `;
 
 const Row = styled(motion.div)`
@@ -143,16 +139,26 @@ const NextSvg = styled.svg`
   cursor: pointer;
 `;
 
+const PrevSvg = styled.svg`
+  position: absolute;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  left: 15px;
+  top: 112px;
+  cursor: pointer;
+`;
+
 const rowVariants = {
-  hidden: {
-    x: window.outerWidth + 5,
-  },
+  hidden: (back: boolean) => ({
+    x: back ? -window.outerWidth - 5 : window.outerWidth + 5,
+  }),
   visible: {
     x: 0,
   },
-  exit: {
-    x: -window.outerWidth - 5,
-  },
+  exit: (back: boolean) => ({
+    x: back ? window.outerWidth + 5 : -window.outerWidth - 5,
+  }),
 };
 
 const boxVariants = {
@@ -191,6 +197,8 @@ const Home = () => {
   console.log(data);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
+  const [back, setBack] = useState(false);
+
   const increaseIndex = () => {
     if (data) {
       if (leaving) return;
@@ -198,6 +206,19 @@ const Home = () => {
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => (prev == maxIndex ? 0 : prev + 1));
+      setBack(false);
+      console.log("increase", back);
+    }
+  };
+  const decreaseIndex = () => {
+    if (data) {
+      if (leaving) return;
+      toggleLeaving();
+      const totalMovies = data.results.length - 1;
+      const maxIndex = Math.floor(totalMovies / offset) - 1;
+      setIndex((prev) => (prev == 0 ? maxIndex : prev - 1));
+      setBack(true);
+      console.log("decrease", back);
     }
   };
   const toggleLeaving = () => setLeaving((prev) => !prev);
@@ -212,13 +233,17 @@ const Home = () => {
     data?.results.find(
       (movie) => String(movie.id) === bigMovieMatch.params.movieId
     );
+
   return (
     <Wrapper>
       {isLoading ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}>
+          <Banner
+            onClick={decreaseIndex}
+            bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}
+          >
             <Title>{data?.results[0].title}</Title>
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
@@ -234,8 +259,23 @@ const Home = () => {
                 d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
               />
             </NextSvg>
-            <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+            <PrevSvg
+              onClick={decreaseIndex}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+            >
+              <path
+                fill="white"
+                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+              />
+            </PrevSvg>
+            <AnimatePresence
+              initial={false}
+              onExitComplete={toggleLeaving}
+              custom={back}
+            >
               <Row
+                custom={back}
                 variants={rowVariants}
                 initial="hidden"
                 animate="visible"
