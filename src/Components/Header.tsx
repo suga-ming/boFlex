@@ -6,7 +6,7 @@ import {
 } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useMatch } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Nav = styled(motion.nav)`
@@ -105,12 +105,12 @@ interface IForm {
 
 const Header = () => {
   const homeMatch = useMatch("/");
-  console.log("homeMatch", homeMatch);
   const tvMatch = useMatch("tv");
   const [searchOpen, setSearchOpen] = useState(false);
   const inputAnimation = useAnimation();
   const navAnimation = useAnimation();
   const { scrollY } = useScroll();
+  const navigate = useNavigate();
   const toggleSearch = () => {
     if (searchOpen) {
       inputAnimation.start({ scaleX: 0 });
@@ -128,9 +128,11 @@ const Header = () => {
       }
     });
   }, [scrollY, navAnimation]);
-  const { register, handleSubmit } = useForm<IForm>();
+  const { register, handleSubmit, setValue } = useForm<IForm>();
   const onValid = (data: IForm) => {
     console.log(data);
+    navigate(`/search?keyword=${data.keyword}`);
+    setValue("keyword", "");
   };
   return (
     <div>
