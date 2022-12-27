@@ -43,6 +43,10 @@ const Overview = styled.p`
 const Slider = styled.div`
   position: relative;
   top: -100px;
+  /* width: 100%; */
+  /* width: 1920px; */
+  /* padding: 30px; */
+  /* overflow: hidden; */
 `;
 
 const Row = styled(motion.div)`
@@ -112,6 +116,12 @@ const BigTitle = styled.h3`
   font-size: 46px;
   position: relative;
   top: -80px;
+`;
+
+const MovieTitle = styled.p`
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding-left: 10px;
 `;
 
 const BogOverView = styled.p`
@@ -204,6 +214,7 @@ const Home = () => {
             <Overview>{data?.results[0].overview}</Overview>
           </Banner>
           <Slider>
+            <MovieTitle>지금 상영중인 영화</MovieTitle>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
               <Row
                 variants={rowVariants}
