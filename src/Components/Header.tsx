@@ -80,6 +80,7 @@ const Input = styled(motion.input)`
   width: 200px;
   height: 30px;
   padding-left: 40px;
+  color: white;
 `;
 
 const logoVariants = {

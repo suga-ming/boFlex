@@ -10,11 +10,11 @@ interface IShow {
 }
 
 export interface IGetShowResult {
-  dates: string;
+  dates?: string;
   page: number;
   results: IShow[];
-  total_pages: number;
-  total_results: number;
+  total_pages?: number;
+  total_results?: number;
 }
 
 // const API_KEY = process.env.REACT_APP_PUBLIC_URL;
@@ -32,7 +32,18 @@ export const getMovies = async () => {
 
 export const getTv = async () => {
   return await axios
-    .get(`${BASE_PATH}//tv/on_the_air?api_key=${API_KEY}`)
+    .get(`${BASE_PATH}/tv/on_the_air?api_key=${API_KEY}`)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getSearch = async (keyword: string | null) => {
+  return await axios
+    .get(
+      `${BASE_PATH}/search/multi?api_key=${API_KEY}&query=${keyword}&page=1&include_adult=false`
+    )
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

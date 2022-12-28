@@ -94,7 +94,7 @@ const Home = () => {
     ["movies", "nowPlaying"],
     getMovies
   );
-  console.log("data?", bigMovieMatch);
+  console.log("data", bigMovieMatch);
 
   const overlayClick = () => {
     navigate(`/`);
