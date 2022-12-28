@@ -1,17 +1,18 @@
 import axios, { AxiosInstance } from "axios";
 
-interface IMovie {
+interface IShow {
   id: number;
   backdrop_path: string;
   poster_path: string;
   overview: string;
-  title: string;
+  title?: string;
+  name?: string;
 }
 
-export interface IGetMoviesResult {
+export interface IGetShowResult {
   dates: string;
   page: number;
-  results: IMovie[];
+  results: IShow[];
   total_pages: number;
   total_results: number;
 }
@@ -23,6 +24,15 @@ const BASE_PATH = "https://api.themoviedb.org/3";
 export const getMovies = async () => {
   return await axios
     .get(`${BASE_PATH}/movie/now_playing?api_key=${API_KEY}`)
+    .then((res) => res.data)
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const getTv = async () => {
+  return await axios
+    .get(`${BASE_PATH}//tv/on_the_air?api_key=${API_KEY}`)
     .then((res) => res.data)
     .catch((err) => {
       console.log(err);

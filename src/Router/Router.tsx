@@ -13,6 +13,7 @@ const Router = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="movies/:id" element={<Home />}></Route>
         <Route path="/tv" element={<Tv />}></Route>
+        <Route path="/tv/:id" element={<Tv />}></Route>
         <Route path="/search" element={<Search />}></Route>
       </Routes>
     </BrowserRouter>
