@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { makeImagePath } from "../utils";
@@ -131,7 +131,7 @@ const Slider = ({ data, type }: IData) => {
       toggleLeaving();
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
-      setIndex((prev) => (prev == maxIndex ? 0 : prev + 1));
+      setIndex((next) => (next == maxIndex ? 0 : next + 1));
       setBack(false);
       console.log("increase", back);
       console.log("index", index);
@@ -154,6 +154,7 @@ const Slider = ({ data, type }: IData) => {
     if (type == "movie") navigate(`/movies/${showId}`);
     else navigate(`/tv/${showId}`);
   };
+  useEffect(() => {}, [back, index]);
   return (
     <div>
       <Container>
