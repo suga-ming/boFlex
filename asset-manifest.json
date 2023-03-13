@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/boFlix/static/css/main.e6c13ad2.css",
+    "main.js": "/boFlix/static/js/main.59d2d334.js",
+    "index.html": "/boFlix/index.html",
+    "main.e6c13ad2.css.map": "/boFlix/static/css/main.e6c13ad2.css.map",
+    "main.59d2d334.js.map": "/boFlix/static/js/main.59d2d334.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.59d2d334.js"
+  ]
+}
