@@ -7,7 +7,7 @@ import Tv from "./Tv";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="boFlix">
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
